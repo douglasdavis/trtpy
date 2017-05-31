@@ -23,6 +23,7 @@ class roc_curve(object):
     xbinrange: bins on the x-axis used to produce the curve if multidimensional histogram (for ROOT input)
     ybinrange: bins on the y-axis used to produce the curve if multidimensional histogram (for ROOT input)
     zbinrange: bins on the z-axis used to produce the curve if multidimensional histogram (for ROOT input)
+    npbinning: define binning from ``numpy.linspace`` if feeding numpy arrays of probabilities.
 
     Attributes
     -----------
@@ -33,16 +34,13 @@ class roc_curve(object):
     """
 
     def __init__(self, sighist, bkghist, primary_axis='x',interpolate=False,
-                 xbinrange=(1,1), ybinrange=(1,1), zbinrange=(1,1),npbinning=None):
+                 xbinrange=(1,1), ybinrange=(1,1), zbinrange=(1,1), npbinning=np.linspace(0.0,1.0,100)):
 
         sigPtConstruct = []
         bkgPtConstruct = []
 
         if isinstance(sighist,np.ndarray) and isinstance(bkghist,np.ndarray):
-            if npbinning is None:
-                binning = np.linspace(0.0,1.0,100)
-            else:
-                binning = npbinning
+            binning = npbinning
             sigHist, sigEdges = np.histogram(sighist,bins=binning)
             bkgHist, bkgEdges = np.histogram(bkghist,bins=binning)
             self.sigInteg, self.bkgInteg = float(np.sum(sigHist)), float(np.sum(bkgHist))

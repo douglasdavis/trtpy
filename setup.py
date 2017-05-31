@@ -3,7 +3,7 @@ from setuptools import setup
 setup(name='trtpy',
       version='0.0.1alpha',
       description='TRT Python Toolkit',
-      url='http://gitlab.cern.ch/ddavis/trtpy',
+      url='https://gitlab.cern.ch/atlas-trt-software/trtpy',
       author='Doug Davis',
       author_email='ddavis@cern.ch',
       license='MIT',
